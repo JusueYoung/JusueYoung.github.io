@@ -1,1176 +1,598 @@
-<!DOCTYPE html>
-<!-- saved from url=(0025)https://kiprey.github.io/ -->
-<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-   
-  <meta name="keywords" content="漏洞挖掘, 调试, 代码, 计算机科学, Kiprey, Blog, 二进制，信息安全">
-   
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>
-     Kiprey's Blog
-  </title>
-  <meta name="generator" content="hexo-theme-ayer">
-  
-  <link rel="shortcut icon" href="https://kiprey.github.io/favicon.ico">
-  
-  
-<link rel="stylesheet" href="./Kiprey&#39;s Blog_files/main.css">
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
 
-  <link rel="stylesheet" href="./Kiprey&#39;s Blog_files/remixicon.min.css">
-  
-<link rel="stylesheet" href="./Kiprey&#39;s Blog_files/custom.css">
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
 
-  
-  <script src="./Kiprey&#39;s Blog_files/push.js.download"></script><script src="./Kiprey&#39;s Blog_files/hm.js.download"></script><script src="./Kiprey&#39;s Blog_files/pace.min.js.download"></script>
-  
-  
 
-  
-<script>
-var _hmt = _hmt || [];
-(function() {
-	var hm = document.createElement("script");
-	hm.src = "https://hm.baidu.com/hm.js?acff2772e1f74a625e1e26c280afa6c2";
-	var s = document.getElementsByTagName("script")[0]; 
-	s.parentNode.insertBefore(hm, s);
-})();
-</script>
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
 
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
 
-<link rel="alternate" href="https://kiprey.github.io/atom.xml" title="Kiprey&#39;s Blog" type="application/atom+xml">
-<style type="text/css">.MathJax_Preview {color: #888}
-#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
-#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
-.MathJax_Error {color: #CC0000; font-style: italic}
-</style><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
-.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
-.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
-.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
-.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
-</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
-#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
-#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
-</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-#MathJax_About.MathJax_MousePost {outline: none}
-.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-.MathJax_MenuItem {padding: 2px 2em; background: transparent}
-.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
-.MathJax_MenuActive .MathJax_MenuArrow {color: white}
-.MathJax_MenuArrow.RTL {left: .5em; right: auto}
-.MathJax_MenuCheck {position: absolute; left: .7em}
-.MathJax_MenuCheck.RTL {right: .7em; left: auto}
-.MathJax_MenuRadioCheck {position: absolute; left: 1em}
-.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
-.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
-.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
-.MathJax_MenuDisabled {color: GrayText}
-.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
-.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
-.MathJax_ContextMenu:focus {outline: none}
-.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
-#MathJax_AboutClose {top: .2em; right: .2em}
-.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
-.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
-.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
-.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
-.MathJax_MenuClose:hover span {background-color: #CCC!important}
-.MathJax_MenuClose:hover:focus {outline: none}
-</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
-</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
-.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
-</style></head>
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
 
-<body class=" pace-done" style=""><div id="MathJax_Message" style="display: none;"></div><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
-  <div class="pace-progress-inner"></div>
-</div>
-<div class="pace-activity"></div></div>
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
 
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
 
-  <div id="app">
-    
-      
-      <canvas width="1777" height="841" style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
-      
-    <main class="content on">
-      
-<section class="cover">
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="./Kiprey&#39;s Blog_files/cover4.jpg" alt="image frame">
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="https://kiprey.github.io/">Kiprey's Blog</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span><span class="typed-cursor typed-cursor--blink">|</span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
 
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
 
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
 
-<script src="./Kiprey&#39;s Blog_files/typed.min.js.download"></script>
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
 
-
-<!-- Subtitle -->
-
-  <script>
-    try {
-      var typed = new Typed("#subtitle", {
-        strings: ['半夏时光，半支离歌', '', ''],
-        startDelay: 1000,
-        typeSpeed: 200,
-        loop: true,
-        backSpeed: 100,
-        showCursor: true
-      });
-    } catch (err) {
-      console.log(err)
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
     }
-  </script>
-  
-<div id="main">
-  <section class="outer">
-  
-  <ul class="ads">
-    
-        <li>
-            <a href="https://kiprey.github.io/">
-                <img src="https://kiprey.github.io/" width="0" alt="">
-            </a>
-        </li>
-    
-</ul>
-  
-  
-  
 
-<div class="notice" style="margin-top:50px">
-    <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad">我……败……了……</div>
-</div>
-<script type="text/javascript">
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("broad").innerHTML = data.hitokoto;
-        })
-        .catch(console.error)
-</script>
-
-<style>
-    .notice {
-        padding: 20px;
-        border: 1px dashed #e6e6e6;
-        color: #969696;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        background: #fbfbfb50;
-        border-radius: 10px;
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
     }
+}*/
 
-    .notice i {
-        float: left;
-        color: #999;
-        font-size: 16px;
-        padding-right: 10px;
-        vertical-align: middle;
-        margin-top: -2px;
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
     }
-
-    .notice-content {
-        display: initial;
-        vertical-align: middle;
+    table,
+    pre {
+        page-break-inside: avoid;
     }
-</style>
-  
-  <article class="articles">
-    
-    
-    
-    
-    <article id="post-Welcome" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2020/05/Welcome/">Welcome
-  <i class="article-topping">置顶</i>
-</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2020/05/Welcome/" class="article-date">
-  <time datetime="2020-05-06T16:00:00.000Z" itemprop="datePublished">2020-05-07</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="Welcome-to-Kiprey’s-Blog">Welcome to Kiprey’s Blog.</h2>
-<h2 id="Just-enjoy-it">Just enjoy it. :)</h2>
-<p><strong>水的不行的 learning list：<a href="https://github.com/kiprey/skr_Learning" target="_blank" rel="noopener">github repo</a></strong></p> 
-      <a class="article-more-link" href="https://kiprey.github.io/2020/05/Welcome/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-dirty-pipe" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/04/dirty-pipe/">Linux Dirty Pipe CVE-2022-0847 漏洞分析</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/04/dirty-pipe/" class="article-date">
-  <time datetime="2022-04-02T16:00:00.000Z" itemprop="datePublished">2022-04-03</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="https://kiprey.github.io/categories/vulnerability-analysis/">vulnerability analysis</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、简介">一、简介</h2>
-<p>Dirty Pipe 漏洞是 Linux 系统中的一个内核提权漏洞，漏洞危害堪比 Dirty COW，但相对于 Dirty COW 来说更加容易利用。</p>
-<p>漏洞影响范围：<a href="https://kiprey.github.io/f6dd975583bd8ce088400648fd9819e4691c8958">pipe: merge anon_pipe_buf*_ops - linux commit</a> （v5.8-rc1） ~ <a href="https://github.com/torvalds/linux/commit/9d2231c5d74e13b2a0546fee6737ee4446017903" target="_blank" rel="noopener">lib/iov_iter: initialize “flags” in new pipe_buffer</a>（v5.17-rc6）</p>
-<p>时间范围大概是 2020/5/21 - 2022/2/21。</p> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/04/dirty-pipe/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/Pwn/" rel="tag">Pwn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/linux/" rel="tag">linux</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-syzkaller-1" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/03/syzkaller-1/">syzkaller 源码阅读笔记-1</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/03/syzkaller-1/" class="article-date">
-  <time datetime="2022-03-14T16:00:00.000Z" itemprop="datePublished">2022-03-15</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、简介">一、简介</h2>
-<p><a href="https://github.com/google/syzkaller" target="_blank" rel="noopener">syzkaller</a> 是 google 开源的一款无监督覆盖率引导的 kernel fuzzer，支持包括 Linux、Windows 等操作系统的测试。</p>
-<p>syzkaller 有很多个部件。其中：</p>
-<ul>
-<li>syz-extract：用于解析 syzlang 中的常量</li>
-<li>syz-sysgen：用于解析 syzlang，提取其中描述的 syscall 和参数类型，以及参数依赖关系</li>
-<li>syz-manager：用于启动与管理 syzkaller</li>
-<li>syz-fuzzer：实际在 VM 中运行的 fuzzer</li>
-<li>syz-executor：实际在 VM 中运行的测试程序</li>
-</ul>
-<p>架构图如下：</p>
-<p><img src="./Kiprey&#39;s Blog_files/process_structure.png" alt="syzkaller 的进程结构"></p>
-<p>在本文中，我将先介绍 <strong>syz-extract 和 syz-sysgen</strong> 的源码。</p> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/03/syzkaller-1/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/syzkaller/" rel="tag">syzkaller</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-other_paper_notes" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/03/other_paper_notes/">论文笔记随笔 - 1</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/03/other_paper_notes/" class="article-date">
-  <time datetime="2022-03-06T16:00:00.000Z" itemprop="datePublished">2022-03-07</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="https://kiprey.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="简介">简介</h2>
-<p>这里存放阅读论文/读代码时所记录下的一些<strong>零碎</strong>笔记。</p>
-<p>由于这部分活动在记录笔记时，出于时间与重要性考虑，只会记录下较为重要的一部分，不会完整记录，因此单篇笔记的篇幅不会太长。</p>
-<blockquote>
-<p>原先是想着把这些随笔放到周报里去，但是这会打乱周报的排版，思来想去还是想单独立一篇文章出来。</p>
-</blockquote> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/03/other_paper_notes/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/paper/" rel="tag">paper</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-e9patch" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/02/e9patch/">《Binary Rewriting without Control Flow Recovery》论文笔记</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/02/e9patch/" class="article-date">
-  <time datetime="2022-02-24T16:00:00.000Z" itemprop="datePublished">2022-02-25</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="https://kiprey.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、概述">一、概述</h2>
-<p>二进制重写技术在很多场景下都有大用，例如修复、加固、插桩、打补丁、调试等等。而大部分二进制重写技术都依赖于从输入二进制中<strong>恢复控制流信息</strong>，这是因为这些二进制重写技术通常都涉及指令移动等等，这就必须调整其他跳转指令的相对跳转偏移，即修复<strong>跳转目标集</strong>。</p>
-<p>但问题在于，<strong>从二进制文件中恢复控制流信息是相当困难的</strong>：</p>
-<ul>
-<li>一种方法是<strong>依赖于特定的二进制元数据</strong>，例如调试符号来恢复重定位信息，但并非所有二进制都会包含这类元数据（strip）</li>
-<li>另一种方法是<strong>使用静态二进制分析技术</strong>来恢复，但通常效果不佳，而且不能应用于大小较大的二进制文件。</li>
-</ul>
-<p>因此大部分二进制重写技术都依赖于一组甚至多组假设，例如特定编译器、特定编程语言等等。这样一来这些二进制重写技术都存在着局限性，难以扩展，同时也没办法处理大型程序，比如 chrome。</p>
-<p>这篇论文向我们展示了一种基于 <strong>x86_64</strong> 的二进制重写技术，称为 e9patch。其中，<code>e9</code> 表示的是 <code>jmpq rel32</code> 的 opcode：0xe9。这种二进制重写技术的优点在于<strong>控制流无关</strong>（<strong>control flow agnostic</strong>），即<strong>无需任何控制流信息的知识</strong>。其二进制重写方法保留了跳转目标集，无需控制流恢复。因此， 这个工具相当的鲁棒，而且还可以 patch 诸如 chrome 等等大小大于 100MB 的二进制程序。</p>
-<p>除了普通的二进制程序以外，e9patch 还可以为 shared objects 或 libraries 打补丁。</p> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/02/e9patch/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/binary-rewriting/" rel="tag">binary rewriting</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-rwctf2022_hso" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/02/rwctf2022_hso/">RWCTF2022 Pwn 笔记3 - hso groupie Writeup</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/02/rwctf2022_hso/" class="article-date">
-  <time datetime="2022-02-01T16:00:00.000Z" itemprop="datePublished">2022-02-02</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="简介">简介</h2>
-<p>这里是复盘 RWCTF2022 中 <code>hso groupie</code> 题时所写下的一些笔记，考点来源于 Project Zero 的 <strong>A deep dive into an NSO zero-click iMessage exploit: Remote Code Execution</strong> 一文。</p>
-<p>整体的做题思路主要由 Riatre 师傅的 exploit 中所推导出，换句话说，这里的笔记主要是对 <a href="https://github.com/Riatre/hso-groupie/tree/master/exploit" target="_blank" rel="noopener">作者 exploit</a> 的解释说明。</p>
-<p>由于这题同样也较为复杂，因此需要单独开一个博文来记录。</p>
-<blockquote>
-<p>联合作者：sakura</p>
-</blockquote> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/02/rwctf2022_hso/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/CTF/" rel="tag">CTF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/Pwn/" rel="tag">Pwn</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-rwctf2022_flag" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/01/rwctf2022_flag/">RWCTF2022 Pwn 笔记2 - FLAG Writeup</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/01/rwctf2022_flag/" class="article-date">
-  <time datetime="2022-01-30T16:00:00.000Z" itemprop="datePublished">2022-01-31</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="简介">简介</h2>
-<p>这里是复盘 RWCTF2022 中 FLAG 题时所写下的一些笔记。</p>
-<p>由于这题较为复杂，因此需要单独开一个博文来记录。</p>
-<blockquote>
-<p>联合作者：sakura</p>
-</blockquote> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/01/rwctf2022_flag/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/CTF/" rel="tag">CTF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/Pwn/" rel="tag">Pwn</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-rwctf2022_qws" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/01/rwctf2022_qws/">RWCTF2022 Pwn 笔记1</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/01/rwctf2022_qws/" class="article-date">
-  <time datetime="2022-01-24T16:00:00.000Z" itemprop="datePublished">2022-01-25</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、简介">一、简介</h2>
-<p>这里是复盘 RWCTF2022 关于:</p>
-<ul>
-<li>QLaas</li>
-<li>Who Moved My Block</li>
-<li>SVME</li>
-</ul>
-<p>这三道题时所写下的一些笔记。</p>
-<blockquote>
-<p>受限于时间与效率，一部分题目的 exp 将不再贴出，只会记录下解题或利用的详细流程。</p>
-</blockquote> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/01/rwctf2022_qws/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/CTF/" rel="tag">CTF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/Pwn/" rel="tag">Pwn</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-IMF" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/01/IMF/">《IMF：Inferred Model-based Fuzzer》论文笔记</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/01/IMF/" class="article-date">
-  <time datetime="2022-01-19T16:00:00.000Z" itemprop="datePublished">2022-01-20</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="https://kiprey.github.io/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、简介">一、简介</h2>
-<ul>
-<li>
-<p>内核 API 函数之间的调用大多是相互依赖的，即一些 API 的调用需要依赖其他 API 调用所产生的上下文，因此若给定的调用上下文无用，则内核 API 将会始终执行失败，无法进入到更深层次的逻辑中。</p>
-</li>
-<li>
-<p>这篇论文提出了一种新的内核 fuzz 方式，它利用内核 API 函数之间的依赖（即 API 调用序列的相似性），来推断出依赖模型，进而利用该模型生成出<strong>随机并且结构性良好的 API 序列</strong>，进行更深层次的 fuzz。</p>
-<p>其中，API 调用的依赖关系包含两种，分别是</p>
-<ol>
-<li>顺序依赖，即 A 函数应该比 B 函数更早被调用。</li>
-<li>数据依赖，函数调用之间存在着数据流传递。</li>
-</ol>
-</li>
-<li>
-<p>Fuzz 的主要目标是 <strong>IOKit Lib</strong>。</p>
-</li>
-<li>
-<p>IMF src - <a href="https://github.com/SoftSec-KAIST/IMF" target="_blank" rel="noopener">github</a></p>
-</li>
-</ul>
-<blockquote>
-<p>需要注意的是，这篇论文是 17 年的论文，实验时所使用的 MacOS 版本为 10.12.3，而本人的机器版本为 MacOS 12.0.1，因此在复现实验是会存在一些困难。</p>
-</blockquote> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/01/IMF/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="https://kiprey.github.io/tags/fuzz/" rel="tag">fuzz</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article id="post-ubuntu_desktop_recover" class="article article-type-post" itemscope="" itemprop="blogPost" data-scroll-reveal="">
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="https://kiprey.github.io/2022/01/ubuntu_desktop_recover/">Ubuntu 恢复图形界面记录</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="https://kiprey.github.io/2022/01/ubuntu_desktop_recover/" class="article-date">
-  <time datetime="2022-01-17T16:00:00.000Z" itemprop="datePublished">2022-01-18</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、背景">一、背景</h2>
-<p>给 npy 安装环境时，误删了她的 ubuntu python3，导致重启 ubuntu 后无法进入图形界面，花了两个小时的时间才解决。</p>
-<p>这里简单记录一下恢复图形界面的操作。</p> 
-      <a class="article-more-link" href="https://kiprey.github.io/2022/01/ubuntu_desktop_recover/">阅读更多...</a>
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-  </article>
-  
-
-  
-  <nav class="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="https://kiprey.github.io/page/2/">2</a><a class="page-number" href="https://kiprey.github.io/page/3/">3</a><span class="space">…</span><a class="page-number" href="https://kiprey.github.io/page/10/">10</a><a class="extend next" rel="next" href="https://kiprey.github.io/page/2/">下一页</a>
-  </nav>
-  
-</section>
-</div>
-
-      <footer class="footer">
-  <div class="outer">
-    <ul>
-      <li>
-        Copyrights ©
-        2020-2022
-        <i class="ri-heart-fill heart_icon"></i> Kiprey
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-      </li>
-    </ul>
-    <ul>
-      <li>
-        
-        
-        <span>
-  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv">22584</span></span>
-  <span class="division">|</span>
-  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv">58743</span></span>
-</span>
-        <!-- <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                var int1 = setInterval(fixCount1, 100);
-                var int2 = setInterval(fixCount2, 100);
-
-                var busuanziValueSiteOffset = 100000000000;
-                var busuanziValuePageOffset = 200000000000;
-                function fixCount1() {
-                    if ($("#busuanzi_value_site_uv").css("display") != "none") {
-                        clearInterval(int1);
-                        $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziValueSiteOffset);
-                    }
-                }
-                function fixCount2() {
-                    if ($("#busuanzi_value_page_pv").css("display") != "none") {
-                        clearInterval(int2);
-                        $("#busuanzi_value_page_pv").html(parseInt($("#busuanzi_value_page_pv").html()) + busuanziValuePageOffset);
-                    }
-                }
-            });
-        </script> -->
-        
-      </li>
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      
-    </ul>
-    <ul>
-      <li>
-        <!-- cnzz统计 -->
-        
-      </li>
-    </ul>
-  </div>
-</footer>
-      <div class="float_btns">
-        <div class="totop" id="totop" style="display: none;">
-  <i class="ri-arrow-up-line"></i>
-</div>
-
-<div class="todark" id="todark">
-  <i class="ri-moon-line"></i>
-</div>
-
-      </div>
-    </main>
-    <aside class="sidebar on">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="https://kiprey.github.io/"><img src="./Kiprey&#39;s Blog_files/ayer-side.svg" alt="Kiprey&#39;s Blog"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="https://kiprey.github.io/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="https://kiprey.github.io/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="https://kiprey.github.io/categories">分类</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="https://kiprey.github.io/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="https://kiprey.github.io/friends">友链</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="https://kiprey.github.io/about">关于</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search" title="搜索">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-      <a class="nav-item-link" target="_blank" href="https://kiprey.github.io/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <script>
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        document.querySelector('.content').classList.remove('on');
-        document.querySelector('.sidebar').classList.remove('on');
-      }
-    </script>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
-  <div class="reward-box">
-    
-    
-  </div>
-</div>
-    
-<script src="./Kiprey&#39;s Blog_files/jquery-2.0.3.min.js.download"></script>
-
-
-<script src="./Kiprey&#39;s Blog_files/lazyload.min.js.download"></script>
-
-<!-- Tocbot -->
-
-<script src="./Kiprey&#39;s Blog_files/jquery.modal.min.js.download"></script>
-<link rel="stylesheet" href="./Kiprey&#39;s Blog_files/jquery.modal.min.css">
-<script src="./Kiprey&#39;s Blog_files/jquery.justifiedGallery.min.js.download"></script>
-
-<script src="./Kiprey&#39;s Blog_files/main.js.download"></script>
-
-<!-- ImageViewer -->
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<link rel="stylesheet" href="./Kiprey&#39;s Blog_files/photoswipe.min.css">
-<link rel="stylesheet" href="./Kiprey&#39;s Blog_files/default-skin.min.css">
-<script src="./Kiprey&#39;s Blog_files/photoswipe.min.js.download"></script>
-<script src="./Kiprey&#39;s Blog_files/photoswipe-ui-default.min.js.download"></script>
-
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
-
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
+    pre {
+        word-wrap: break-word;
     }
-    viewer_init()
-</script>
+}
 
-<!-- MathJax -->
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
 
-<script type="text/x-mathjax-config;executed=true">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-  });
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
 
-  MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for(i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-  });
-</script>
+.md-mathjax-midline {
+    background: #fafafa;
+}
 
-<script src="./Kiprey&#39;s Blog_files/MathJax.js.download"></script>
-<script>
-  var ayerConfig = {
-    mathjax: true
-  }
-</script>
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
 
-<!-- Katex -->
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
 
-<!-- busuanzi  -->
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
 
+.sidebar-tabs {
+    border-bottom: none;
+}
 
-<script src="./Kiprey&#39;s Blog_files/busuanzi-2.3.pure.min.js.download"></script>
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
 
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
 
-<!-- ClickLove -->
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
 
-<!-- ClickBoom1 -->
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
 
-<!-- ClickBoom2 -->
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
 
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
 
-<script src="./Kiprey&#39;s Blog_files/clickBoom2.js.download"></script>
+.md-lang {
+    color: #b4654d;
+}
 
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
 
-<!-- CodeCopy -->
+#md-notification .btn {
+    border: 0;
+}
 
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
 
-<link rel="stylesheet" href="./Kiprey&#39;s Blog_files/clipboard.css">
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
 
-<script src="./Kiprey&#39;s Blog_files/clipboard.min.js.download"></script>
-<script>
-  function wait(callback, seconds) {
-    var timelag = null;
-    timelag = window.setTimeout(callback, seconds);
-  }
-  !function (e, t, a) {
-    var initCopyCode = function(){
-      var copyHtml = '';
-      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
-      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
-      copyHtml += '</button>';
-      $(".highlight .code pre").before(copyHtml);
-      $(".article pre code").before(copyHtml);
-      var clipboard = new ClipboardJS('.btn-copy', {
-        target: function(trigger) {
-          return trigger.nextElementSibling;
-        }
-      });
-      clipboard.on('success', function(e) {
-        let $btn = $(e.trigger);
-        $btn.addClass('copied');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-checkbox-circle-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPIED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-checkbox-circle-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-      clipboard.on('error', function(e) {
-        e.clearSelection();
-        let $btn = $(e.trigger);
-        $btn.addClass('copy-failed');
-        let $icon = $($btn.find('i'));
-        $icon.removeClass('ri-file-copy-2-line');
-        $icon.addClass('ri-time-line');
-        let $span = $($btn.find('span'));
-        $span[0].innerText = 'COPY FAILED';
-        
-        wait(function () { // 等待两秒钟后恢复
-          $icon.removeClass('ri-time-line');
-          $icon.addClass('ri-file-copy-2-line');
-          $span[0].innerText = 'COPY';
-        }, 2000);
-      });
-    }
-    initCopyCode();
-  }(window, document);
-</script>
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
 
-
-<!-- CanvasBackground -->
-
-
-<script src="./Kiprey&#39;s Blog_files/dz.js.download"></script>
-
-
-<!-- mermaid -->
-
-  <script src="https://cdn.bootcdn.net/ajax/libs/mermaid/8.5.2/mermaid.min.js"></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({theme: 'forest'});
-    }
-  </script>
-
-<!-- baiduSpider auto push -->
-
-  <script>
-    (function(){
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https'){
-       bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-      }
-      else{
-      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-      }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-    </script>
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
 
 
-    
-  </div><style type="text/css" data-typed-js-css="true">
-        .typed-cursor{
-          opacity: 1;
-        }
-        .typed-cursor.typed-cursor--blink{
-          animation: typedjsBlink 0.7s infinite;
-          -webkit-animation: typedjsBlink 0.7s infinite;
-                  animation: typedjsBlink 0.7s infinite;
-        }
-        @keyframes typedjsBlink{
-          50% { opacity: 0.0; }
-        }
-        @-webkit-keyframes typedjsBlink{
-          0% { opacity: 1; }
-          50% { opacity: 0.0; }
-          100% { opacity: 1; }
-        }
-      </style><canvas width="1366" height="625" style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas><canvas id="c_n25" width="1366" height="569" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
 
-
-</body></html>
+</style><title>Computer Science Infrastructure</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h3 id='computer-science-infrastructure'><span>Computer Science Infrastructure</span></h3><hr /><p><span>2022.4.28 ~ 2022.6.18</span></p><p><strong><span>素质教育</span></strong></p><p><span>6：45前起床，保持45分钟的晨读时间</span></p><p><span>晚读 英文原版书刊阅读</span></p><p><span>上班时间禁止，手机、耳机出现在桌面</span></p><p><span>业余时间精通Shell、LRU技术</span></p><p>&nbsp;</p><p><span>2022.6.19 ~ 2023.6.19</span></p><h4 id='english'><span>English</span></h4><ul><li><p><span>第一阶段</span></p><p><span>6：45前起床，保持45分钟的晨读时间，背单词；晚上睡觉前review</span></p></li><li><p><span>第二阶段</span></p><p><span>晨读内容改为词汇书做题；晚读改为英文原版书刊阅读</span></p></li><li><p><span>第三阶段</span></p><p><span>晨读内容改为美剧；晚读扩展英文名著</span></p></li></ul><h4 id='attitude'><span>Attitude</span></h4><ul><li><span>工作时间内，要求进去到心流状态，以3小时为一个单元，一个单元内只处理一件事</span></li><li><span>周六，保持7小时的code review</span></li><li><span>每天晚上11：30 看半个小时的书</span></li></ul><h4 id='computer-network'><span>Computer Network</span></h4><ul><li><span>6.21 ~ 9.21</span></li><li><span>cs144实验</span></li><li><span>计算机网络方面的视频、书籍看一遍</span></li><li><span>做5套计网方面的考研题</span></li></ul><h4 id='operate-system'><span>Operate System</span></h4><ul><li><span>9.22 ~ 1.22</span></li><li><span>走上计算机技术之路的推荐实验</span></li><li><span>推荐课程</span></li><li><span>实践自己的操作系统</span></li></ul><h4 id='swiftui-tv---shell'><span>swiftUI TV. &amp;  Shell</span></h4><ul><li><span>1.23 ~ 6.23</span></li><li><span>swiftUI + Combine 前期学习时间大约1 month</span></li><li><span>review电视台完整代码1 month</span></li><li><span>完成底层网络请求相关的基建 1 month</span></li><li><span>完成播放器相关的封装 1 month</span></li><li><span>完成上层的主要业务逻辑 1 month</span></li></ul><hr /><p><span>2023.7.15~2024.7.29</span></p><h4 id='database'><span>DataBase</span></h4><ul><li><span>7.15 ~ 10. 15</span></li><li><span>数据库原理</span></li><li><span>主流的数据库操作</span></li></ul><h4 id='c--go--lua'><span>C++ &amp; Go &amp; Lua</span></h4><ul><li><span>10.16 ~ 1.16</span></li></ul><h4 id='custom-tv'><span>Custom TV</span></h4><ul><li><span>1.17 ~ 4.17</span></li></ul><h4 id='abstract-algebra'><span>Abstract Algebra</span></h4><ul><li><span>4.18 ~ 5.18</span></li></ul><h4 id='cuber-hand'><span>Cuber Hand</span></h4><ul><li><span>4.18 ~ 6.18</span></li></ul><h4 id='convex-optimization'><span>Convex Optimization</span></h4><ul><li><span>6.19 ~ 7.29</span></li></ul><hr /><p><span>2024.8.1~2025.8.1</span></p><h4 id='leetcode-600'><span>LeetCode 600</span></h4><ul><li><span>8.1 ~ 2.1</span></li></ul><h4 id='mini-game'><span>Mini Game</span></h4><ul><li><span>10.1 ~ 5.1</span></li></ul><h4 id='design-patten'><span>Design Patten</span></h4><ul><li><span>5.2 ~ 8.1</span></li></ul><hr /><p><span>2025.8.10~2026.8.10</span></p><h4 id='uav'><span>UAV</span></h4><ul><li><span>8.10 ~ 2.10</span></li></ul><h4 id='sweep-robot'><span>Sweep Robot</span></h4><ul><li><span>2.11 ~ 7.11</span></li></ul><h4 id='opencv'><span>OpenCV</span></h4><ul><li><span>7.12 ~ 8.10</span></li></ul><p>&nbsp;</p><p><span> </span></p></div></div>
+</body>
+</html>
